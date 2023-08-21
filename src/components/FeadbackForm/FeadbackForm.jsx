@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Statistics } from 'components/Statistics/Statistics';
 import { Container } from './FeadbackFrom.styled';
 import { Component } from 'react';
@@ -57,3 +57,13 @@ export class FeadbackForm extends Component {
     );
   }
 }
+
+FeadbackForm.propTypes = {
+  props: PropTypes.exact({
+    state: PropTypes.exact({
+      good: PropTypes.number,
+      neutral: PropTypes.number,
+      bad: PropTypes.number,
+    }),
+  }),
+};
