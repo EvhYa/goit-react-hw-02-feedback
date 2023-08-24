@@ -1,19 +1,15 @@
 import { Container, FbButton } from './FeadbackOptions.styled';
 import PropTypes from 'prop-types';
 
-export function FeedbackOptions({ options, onLeaveFeedback: { addGoodFb, addNeutralFb, addBadFb } }) {
+export function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
     <>
       <Container>
-        <FbButton type="button" onClick={addGoodFb}>
-          {options[0]}
-        </FbButton>
-        <FbButton type="button" onClick={addNeutralFb}>
-          {options[1]}
-        </FbButton>
-        <FbButton type="button" onClick={addBadFb}>
-          {options[2]}
-        </FbButton>
+        {options.map(option => (
+          <FbButton key={option} type="button" onClick={()=>onLeaveFeedback(option)}>
+            {option}
+          </FbButton>
+        ))}
       </Container>
     </>
   );
@@ -21,9 +17,5 @@ export function FeedbackOptions({ options, onLeaveFeedback: { addGoodFb, addNeut
 
 FeedbackOptions.propTypes = {
   options: PropTypes.array.isRequired,
-  onLeaveFeedback: PropTypes.exact({
-    addGoodFb: PropTypes.func.isRequired,
-    addNeutralFb: PropTypes.func.isRequired,
-    addBadFb: PropTypes.func.isRequired,
-  }),
+  onLeaveFeedback: PropTypes.func.isRequired,
 };

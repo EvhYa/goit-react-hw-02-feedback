@@ -14,6 +14,7 @@ export const FbButton = styled.button`
   background-color: #8ecae6;
   transition: background-color 0.5s ease;
   font-weight: 600;
+  text-transform: capitalize;
   &:hover {
     background-color: #219ebc;
   }

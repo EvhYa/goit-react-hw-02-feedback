@@ -5,7 +5,7 @@ export const ListItem = styled.ul`
     margin-bottom: 10px;
   }
   &:last-child,
-  :nth-last-child(2) {
+  &:nth-last-child(2) {
     font-weight: 700;
   }
 `;

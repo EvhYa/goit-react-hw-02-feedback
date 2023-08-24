@@ -13,23 +13,18 @@ export class App extends Component {
     bad: 0,
   };
 
-  addGoodFb = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
-  };
-  addNeutralFb = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-  addBadFb = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
+  handleFeadback = option => {
+    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
 
   countTotalFeedback = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+    const feadbackQuantity = Object.values(this.state);
+    return feadbackQuantity.reduce((acc, value) => acc + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
-    return Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)
-      ? Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)
+    return this.countTotalFeedback()
+      ? Math.round((this.state.good / this.countTotalFeedback()) * 100)
       : 0;
   };
 
@@ -39,8 +34,8 @@ export class App extends Component {
         <GlobalStyle />
         <Section title="Please leave feadback">
           <FeedbackOptions
-            options={['Good', 'Neutral', 'Bad']}
-            onLeaveFeedback={{ addGoodFb: this.addGoodFb, addNeutralFb: this.addNeutralFb, addBadFb: this.addBadFb }}
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.handleFeadback}
           />
         </Section>
         <Section title="Statistics">
